@@ -1,15 +1,17 @@
 import hero from './hero.jpg'
-import meta from './meta.png'
-import shopify from './shopify.png'
-import starbucks from './starbucks.png'
-import tesla from './tesla.png'
+import esports from './esports.png'
+import scholarshipauditions from './scholarshipauditions.png'
+import vermeer from './vermeer.svg'
+import nwc from './nwc.png'
 import logo from './logo.svg'
+import flashcardsaas from './flashcardsaas.jpeg'
 
 export {
     hero,
-    meta,
-    shopify,
-    starbucks,
-    tesla,
-    logo
+    esports,
+    scholarshipauditions,
+    vermeer,
+    nwc,
+    logo,
+    flashcardsaas
 }
