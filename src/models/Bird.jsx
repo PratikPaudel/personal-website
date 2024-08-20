@@ -10,3 +10,4 @@ const Birds = () => {
         </mesh>
     );
 }
+export default Birds;
