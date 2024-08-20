@@ -3,10 +3,10 @@ import React from "react";
 import skyScene from "../assets/3d/sky.glb";
 
 const Sky = () => {
-    const sky = useGLTF(skyScene);
+    const { scene } = useGLTF(skyScene);
     return (
         <mesh>
-            <primitive object={sky.scene}/>
+            <primitive object={scene}/>
         </mesh>
     )
 }

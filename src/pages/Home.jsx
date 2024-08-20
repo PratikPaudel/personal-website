@@ -1,7 +1,10 @@
 ﻿import {Suspense} from 'react';
 import { Canvas } from '@react-three/fiber';
 import {Loader} from "@react-three/drei";
-import {Island, Sky } from '../models';
+import {Island } from '../models/Island.jsx';
+import Sky from "../models/Sky.jsx";
+import Birds from "../models/Bird.jsx";
+import Plane from "../models/Plane.jsx";
 const Home = () => {
     const adjustIslandForScreenSize = () => {
         let screenScale, screenPosition;
@@ -39,14 +42,16 @@ const Home = () => {
                         groundColor='#000000'
                         intensity={1}
                     />
-                <Sky />
-                <Island
-                    position={islandPosition}
-                    rotation={[0.1, 4.7077, 0]}
-                    scale={islandScale}
-                />
+                    <Birds />
+                    <Sky />
+                    <Island
+                        position={islandPosition}
+                        rotation={[0.1, 4.7077, 0]}
+                        scale={islandScale}
+                    />
+                    <Plane />
                 </Suspense>
-                    
+                
             </Canvas>
         </section>
     )
