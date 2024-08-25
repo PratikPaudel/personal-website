@@ -1,4 +1,4 @@
-﻿import { esports, scholarshipauditions, vermeer, nwc } from "../assets/images";
+﻿import { esports, scholarshipauditions, vermeer, nwc, moodlog } from "../assets/images";
 import {
     contact,
     css,
@@ -222,5 +222,14 @@ export const projects = [
         name: 'Pantry Tracker & Recipe Recommender',
         description: 'helps you effortlessly manage your pantry inventory and discover new recipes based on what you have on hand. With advanced AI, it recognizes products and suggests delicious recipes tailored to your ingredients.',
         link: 'https://github.com/PratikPaudel/pantry-tracker',
+        github: '',
+    },
+    {
+        iconUrl: moodlog,
+        theme: 'btn-back-blue',
+        name: 'MoodLog',
+        description: 'MoodLog helps you log and visualize your mood patterns, improving self-awareness and mental health management. Integrated with Firebase for secure user login, real-time data storage, and personalized mood tracking.',
+        link: 'https://github.com/PratikPaudel/moodlog',
+        github: '',
     }
 ];
