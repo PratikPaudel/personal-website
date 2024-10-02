@@ -1,17 +1,28 @@
 ﻿import { Link } from "react-router-dom";
-
 import { CTA } from "../components";
 import { projects } from "../constants";
 import { arrow } from "../assets/icons";
+import posthog from 'posthog-js';  // Import PostHog
 
 const Projects = () => {
+
+    // Track page view when the Projects component is loaded
+    posthog.capture('page_view', { page_name: 'Projects Page' });
+
+    // Function to handle project link click tracking
+    const trackProjectClick = (projectName) => {
+        posthog.capture('project_link_click', {
+            project_name: projectName
+        });
+    };
+
     return (
         <section className='max-container'>
             <h1 className='head-text'>
                 My{" "}
                 <span className='blue-gradient_text drop-shadow font-semibold'>
-          Projects
-        </span>
+                    Projects
+                </span>
             </h1>
 
             <p className='text-slate-500 mt-2 leading-relaxed'>
@@ -30,7 +41,7 @@ const Projects = () => {
                             <div className='btn-front rounded-xl flex justify-center items-center'>
                                 <img
                                     src={project.iconUrl}
-                                    alt='threads'
+                                    alt={project.name}
                                     className='w-1/2 h-1/2 object-contain'
                                 />
                             </div>
@@ -47,6 +58,7 @@ const Projects = () => {
                                     target='_blank'
                                     rel='noopener noreferrer'
                                     className='font-semibold text-blue-600'
+                                    onClick={() => trackProjectClick(project.name)}  // Track link click
                                 >
                                     Live Link
                                 </Link>
