@@ -2,7 +2,7 @@
 
 import { Footer, Navbar } from "./components";
 import { About, Contact, Home, Projects } from "./pages";
-
+import posthog from 'posthog-js';
 const App = () => {
     return (
         <main className='bg-slate-300/20'>
