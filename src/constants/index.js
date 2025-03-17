@@ -212,17 +212,30 @@ export const projects = [
     {
         iconUrl: aiflashcards,
         theme: 'btn-back-green',
-        name: 'AI Flashcards',
-        description: 'Just paste your text, and the AI takes care of generating smart flashcards for you. Plus, it can even pull information from PDFs and images to create flashcards. It’s designed to make learning easier and more flexible.',
-        link: 'https://github.com/PratikPaudel/flashcard-saas',
+        name: 'human™ - a Large Lived Experience Model',
+        description: 'A modern web application that allows users to search through an archive of human experiences using voice or text input, powered by AI-driven search and summarization capabilities.',
+        link: 'https://github.com/PratikPaudel/llem',
     },
+    {
+        iconUrl: aiflashcards,
+        theme: 'btn-back-green',
+        name: 'GitNest 🌳',
+        description: 'Visualize GitHub repository structures with an elegant, interactive tree view.',
+        link: 'https://github.com/PratikPaudel/GitNest',
+    },
+    {
+        iconUrl: aiflashcards,
+        theme: 'btn-back-green',
+        name: 'Ecocycle',
+        description: 'A real-time data manipulation web application allowing administrators to add, track and analyze training metrics instantly, improving decision-making efficiency for over 5 department.',
+        link: 'https://github.com/Kitamreik/ecocycle-test',
+    },    
     {
         iconUrl: pantrytracker,
         theme: 'btn-back-yellow',
         name: 'Pantry Tracker & Recipe Recommender',
-        description: 'helps you effortlessly manage your pantry inventory and discover new recipes based on what you have on hand. With advanced AI, it recognizes products and suggests delicious recipes tailored to your ingredients.',
+        description: 'Helps you effortlessly manage your pantry inventory and discover new recipes based on what you have on hand. With advanced AI, it recognizes products and suggests delicious recipes tailored to your ingredients.',
         link: 'https://github.com/PratikPaudel/pantry-tracker',
-        github: '',
     },
     {
         iconUrl: moodlog,
@@ -230,6 +243,12 @@ export const projects = [
         name: 'MoodLog',
         description: 'MoodLog helps you log and visualize your mood patterns, improving self-awareness and mental health management. Integrated with Firebase for secure user login, real-time data storage, and personalized mood tracking.',
         link: 'https://github.com/PratikPaudel/moodlog',
-        github: '',
-    }
+    }, 
+    {
+        iconUrl: aiflashcards,
+        theme: 'btn-back-green',
+        name: 'AI Flashcards',
+        description: 'Just paste your text, and the AI takes care of generating smart flashcards for you. Plus, it can even pull information from PDFs and images to create flashcards. It’s designed to make learning easier and more flexible.',
+        link: 'https://github.com/PratikPaudel/flashcard-saas',
+    }, 
 ];
