@@ -46,13 +46,12 @@ const HomeInfo = ({ currentStage }) => {
 
     if (currentStage === 4) {
         return (
-            <div className='info-box'>
+             <div className='info-box'>
                 <p className='font-medium sm:text-xl text-center'>
-                    Need a project done or looking for a dev? <br/> I'm just a few keystrokes away
+                    Full Stack Software Engineer seeking new opportunities in the US <br/> Available for immediate hire
                 </p>
-
                 <Link to='/contact' className='neo-brutalism-white neo-btn'>
-                    Let's talk
+                    Let's connect
                     <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
                 </Link>
             </div>
