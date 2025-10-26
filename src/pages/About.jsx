@@ -14,15 +14,15 @@ const About = () => {
             <h1 className='head-text'>
                 Hello, I'm{" "}
                 <span className='blue-gradient_text font-semibold drop-shadow'>
-          {" "}
+                    {" "}
                     Pratik
-        </span>{" "}
+                </span>{" "}
                 👋
             </h1>
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
-                    I'm a first-gen computer science and graphics design student who loves both frontend and backend engineering. Outside of school, you'll find me working on video projects, reading, and traveling.
+                    A first-gen college graduate passionate about full-stack development and AI engineering. When I'm not coding, you'll find me working on video projects, reading, and traveling.
                 </p>
             </div>
 
@@ -31,7 +31,7 @@ const About = () => {
 
                 <div className='mt-16 flex flex-wrap gap-12'>
                     {skills.map((skill) => (
-                        <div className='block-container w-20 h-20' key={skill.name}>
+                        <div className='block-container w-20 h-20 group relative' key={skill.name}>
                             <div className='btn-back rounded-xl' />
                             <div className='btn-front rounded-xl flex justify-center items-center'>
                                 <img
@@ -39,6 +39,11 @@ const About = () => {
                                     alt={skill.name}
                                     className='w-1/2 h-1/2 object-contain'
                                 />
+                            </div>
+                            <div className='absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none'>
+                                <span className='bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap'>
+                                    {skill.name}
+                                </span>
                             </div>
                         </div>
                     ))}
@@ -75,6 +80,7 @@ const About = () => {
                                     borderStyle: "solid",
                                     borderBottomColor: experience.iconBg,
                                     boxShadow: "none",
+                                    maxWidth: "600px",
                                 }}
                             >
                                 <div>
@@ -102,6 +108,19 @@ const About = () => {
                             </VerticalTimelineElement>
                         ))}
                     </VerticalTimeline>
+                </div>
+            </div>
+
+            <div className='py-16'>
+                <h3 className='subhead-text'>Leadership & Impact</h3>
+                <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+                    <ul className='list-disc ml-5 space-y-2'>
+                        <li>5x Hackathon Winner (HackHarvard, Y Combinator, and more)</li>
+                        <li>YouTube Content Creator (100K+ views, 660+ subscribers)</li>
+                        <li>Research Assistant - H-alpha Spectral Imaging of z&gt;5 Quasars (Jan 2024 - May 2024)</li>
+                        <li>NEXT Program Mentor (2022-2023)</li>
+                        <li>Intercultural Development Club Leader (2021-2024)</li>
+                    </ul>
                 </div>
             </div>
 

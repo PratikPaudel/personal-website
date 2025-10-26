@@ -96,7 +96,7 @@ body:has(.card[data-color="green"]:hover) {
 
 .block-container {
     position: relative;
-    transition: 250ms;
+    transition: 150ms;
     perspective: 500px;
 }
 
@@ -106,7 +106,7 @@ body:has(.card[data-color="green"]:hover) {
     z-index: -1;
     width: inherit;
     height: inherit;
-    transition: 250ms;
+    transition: 150ms;
     transform-style: preserve-3d;
     transform-origin: bottom right;
     transform: rotateZ(15deg);
@@ -154,7 +154,7 @@ body:has(.card[data-color="green"]:hover) {
     background-color: #ffffff33;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    transition: 250ms;
+    transition: 150ms;
     transform-style: preserve-3d;
     transform-origin: top left;
     overflow: hidden;
@@ -183,4 +183,22 @@ body:has(.card[data-color="green"]:hover) {
     border: #fff;
     box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
     0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+}
+
+/* Wider timeline cards */
+@media only screen and (min-width: 1170px) {
+    .vertical-timeline--two-columns .vertical-timeline-element-content {
+        width: 60% !important;
+    }
+
+    /* Left-side cards (StackAI, etc.) - margin-left */
+    .vertical-timeline--two-columns .vertical-timeline-element:nth-child(odd):not(.vertical-timeline-element--right) .vertical-timeline-element-content {
+        margin-left: -16% !important;
+    }
+
+    /* Right-side cards (Boxsy, etc.) - margin-right */
+    .vertical-timeline--two-columns .vertical-timeline-element:nth-child(even):not(.vertical-timeline-element--left) .vertical-timeline-element-content,
+    .vertical-timeline--two-columns .vertical-timeline-element.vertical-timeline-element--right .vertical-timeline-element-content {
+        margin-right: -16% !important;
+    }
 }

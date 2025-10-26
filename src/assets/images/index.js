@@ -6,6 +6,8 @@ import nwc from './nwc.png'
 import logo from './logo.svg'
 import flashcardsaas from './flashcardsaas.jpeg'
 import moodlog from './moodlog.png'
+import boxsy from './boxsy.png'
+import stackai from './stackai.png'
 
 export {
     hero,
@@ -16,4 +18,6 @@ export {
     logo,
     flashcardsaas,
     moodlog,
+    boxsy,
+    stackai,
 }

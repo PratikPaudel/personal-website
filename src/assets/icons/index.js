@@ -29,6 +29,12 @@ import photoshop from './photoshop.svg';
 import youtube from './youtube.svg';
 import aiflashcards from './aiflashcards.svg';
 import pantrytracker from './pantrytracker.svg';
+import python from './python.svg';
+import java from './java.svg';
+import postgres from './postgres.svg';
+import redis from './redis.svg';
+import gcp from './gcp.svg';
+import azure from './azure.svg';
 export {
     css,
     express,
@@ -60,5 +66,11 @@ export {
     photoshop,
     youtube,
     aiflashcards,
-    pantrytracker
+    pantrytracker,
+    python,
+    java,
+    postgres,
+    redis,
+    gcp,
+    azure
 }

@@ -1,4 +1,4 @@
-﻿import { esports, scholarshipauditions, vermeer, nwc, moodlog } from "../assets/images";
+﻿import { esports, scholarshipauditions, vermeer, nwc, moodlog, boxsy, stackai } from "../assets/images";
 import {
     contact,
     css,
@@ -24,7 +24,13 @@ import {
     figma,
     illustrator,
     premierepro,
-    photoshop
+    photoshop,
+    python,
+    java,
+    postgres,
+    redis,
+    gcp,
+    azure
 } from "../assets/icons";
 
 export const skills = [
@@ -34,39 +40,14 @@ export const skills = [
         type: "Frontend",
     },
     {
-        imageUrl: express,
-        name: "Express",
-        type: "Backend",
-    },
-    {
-        imageUrl: git,
-        name: "Git",
-        type: "Version Control",
-    },
-    {
-        imageUrl: github,
-        name: "GitHub",
-        type: "Version Control",
-    },
-    {
         imageUrl: javascript,
         name: "JavaScript",
         type: "Frontend",
     },
     {
-        imageUrl: mongodb,
-        name: "MongoDB",
-        type: "Database",
-    },
-    {
         imageUrl: nextjs,
         name: "Next.js",
         type: "Frontend",
-    },
-    {
-        imageUrl: nodejs,
-        name: "Node.js",
-        type: "Backend",
     },
     {
         imageUrl: react,
@@ -127,35 +108,84 @@ export const skills = [
         imageUrl: premierepro,
         name: "Premiere Pro",
         type: "Video Editing",
+    },
+    {
+        imageUrl: python,
+        name: "Python",
+        type: "Backend",
+    },
+    {
+        imageUrl: java,
+        name: "Java",
+        type: "Backend",
+    },
+    {
+        imageUrl: postgres,
+        name: "PostgreSQL",
+        type: "Database",
+    },
+    {
+        imageUrl: redis,
+        name: "Redis",
+        type: "Database",
+    },
+    {
+        imageUrl: gcp,
+        name: "Google Cloud Platform",
+        type: "Cloud",
+    },
+    {
+        imageUrl: azure,
+        name: "Azure",
+        type: "Cloud",
     }
 ];
 
 export const experiences = [
     {
-        title: "Software Engineer",
-        company_name: "Vermeer Coorporation",
+        title: "AI Engineer",
+        company_name: "StackAI",
+        icon: stackai,
+        iconBg: "#FFFFFF",
+        date: "Oct 2024 - Present",
+        points: [
+            "San Francisco, CA",
+        ],
+    },
+    {
+        title: "Full Stack Developer",
+        company_name: "Boxsy Inc.",
+        icon: boxsy,
+        iconBg: "#6366F1",
+        date: "Jul 2024 - Oct 2024",
+        points: [
+            "Actively monitored the landscape of AI-powered development tools, evaluating and implementing cutting-edge solutions to enhance engineering productivity and developer workflows at Boxsy's SaaS platform",
+            "Developed scalable frontend interfaces and backend APIs while integrating AI-driven features into the platform, implementing AI models for personalized user interactions and building data pipelines to support AI-powered functionalities",
+            "Established development workflows using agile methodologies, implemented testing frameworks and performance optimization strategies, while participating in cross-functional collaboration through sprint planning",
+        ],
+    },
+    {
+        title: "IT - Software Engineering Intern",
+        company_name: "Vermeer Corporation",
         icon: vermeer,
         iconBg: "#accbe1",
-        date: "May 2024 - Present",
+        date: "May 2024 - Dec 2024",
         points: [
-            "Developing and maintaining microservices within a distributed architecture using .NET, C#, and JavaScript/jQuery, ensuring scalability and flexibility.",
-            "Managing infrastructure in cloud environments with Linux/Unix-based systems and container technologies like Docker and Kubernetes, integrating testing practices and conducting unit testing.",
-            "Participating in Scrum ceremonies and agile processes, collaborating with cross-functional teams to deliver high-quality software increments.",
-            "Implementing CI/CD pipelines with GitHub Actions, Docker, and Terraform to automate build, test, and deployment processes.",
+            "Developed enterprise form builder using .NET with OAuth 2.0 authentication, digitizing vehicle inspection workflows and reducing manual processes by 92% through automated solutions",
+            "Delivered new features weekly using Agile methodologies and Test-Driven Development, incorporating feedback from 50+ users and dealers, resulting in 40% improvement in feature usability",
+            "Spearheaded containerization of 5+ APIs with Docker and implemented automated CI/CD workflows with integration testing, reducing deployment times by 40% and improving test coverage by 30%",
         ],
     },
     {
         title: "Full Stack Web Developer",
-        company_name: "Northwestern",
+        company_name: "Northwestern College",
         icon: nwc,
         iconBg: "#fbc3bc",
-        date: "Jan 2021 - Feb 2022",
+        date: "Aug 2022 - May 2024",
         points: [
-            "Revamping and modernizing a comprehensive college website using .NET, C#, HTML, CSS, and JavaScript, resulting in a visually appealing and highly functional platform, ensuring seamless cross-platform user experience.",
-            "Creating 150+ modular components and landing pages, leading to a 30% increase in page views and a 20% longer average time spent on site (Google Analytics).",
-            "Collaborating with cross-functional teams to align website designs, including concepts, wireframes, and prototypes, with brand guidelines and objectives.",
-            "Empowering non-technical marketing teams with a CMS and website builder, resulting in a 40% reduction in reliance on developers for routine changes.",
-            "Engineering database-driven features for dynamic content rendering, simplifying CMS usage, optimizing code efficiency, and improving overall functionality.",
+            "Revamped a comprehensive college website using .NET, C#, HTML, CSS, and JavaScript, resulting in a visually appealing and highly functional platform, ensuring seamless user experience on cross-platform",
+            "Created 100+ modular components, web pages, led to 30% increase in page views and 20% longer average time spent on site (Google Analytics)",
+            "Empowered non-technical marketing teams with CMS, website builder, resulting in a 40% reduction in reliance on developers for routine changes",
         ],
     },
     {
@@ -175,11 +205,11 @@ export const experiences = [
         company_name: "Northwestern",
         icon: esports,
         iconBg: "#A80000",
-        date: "Jan 2023 - Present",
+        date: "Aug 2021 - Aug 2024",
         points: [
-            "Leading a media team, conducting 50+ player interviews, curating content, travel vlogs, and overseeing content management decisions for the Esports team.",
-            "Producing engaging Twitch and YouTube content, including intros, outros, and animations for the Esports team.",
-            "Designing stream graphics, landing pages, and visual showcases to enhance the team's online presence.",
+            "Led a media team, conducting 50+ player interviews, curating content, travel vlogs, and overseeing content management decisions for the Esports team",
+            "Produced engaging Twitch and YouTube content, creating intros, outros, and animations for the Esports team",
+            "Designed stream graphics, landing pages, and visual showcases to enhance the team's online presence",
         ],
     },
 ];
@@ -200,7 +230,6 @@ export const socialLinks = [
         iconUrl: linkedin,
         link: 'https://www.linkedin.com/in/heypratikpaudel',
     },
-    ,
     {
         name: 'YouTube',
         iconUrl: youtube,
