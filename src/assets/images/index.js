@@ -1,4 +1,3 @@
-import hero from './hero.jpg'
 import esports from './esports.png'
 import scholarshipauditions from './scholarshipauditions.png'
 import vermeer from './vermeer.svg'
@@ -10,7 +9,6 @@ import boxsy from './boxsy.png'
 import stackai from './stackai.png'
 
 export {
-    hero,
     esports,
     scholarshipauditions,
     vermeer,
