@@ -1,13 +1,13 @@
 ﻿import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 
+import { soundoff, soundon } from "../assets/icons";
 import sakuraPart0 from "../assets/sakura-part0.mp3";
 import sakuraPart1 from "../assets/sakura-part1.mp3";
 import sakuraPart2 from "../assets/sakura-part2.mp3";
 import sakuraPart3 from "../assets/sakura-part3.mp3";
 import sakuraPart4 from "../assets/sakura-part4.mp3";
 import { HomeInfo, Loader } from "../components";
-import { soundoff, soundon } from "../assets/icons";
 import { Bird, Island, Plane, Sky } from "../models";
 
 const Home = () => {
@@ -29,6 +29,7 @@ const Home = () => {
     const [isPlayingMusic, setIsPlayingMusic] = useState(false);
     const [showHints, setShowHints] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
         // Check if user has seen the hints before
@@ -89,10 +90,10 @@ const Home = () => {
         // If screen width is less than 768px, adjust the scale and position
         if (window.innerWidth < 768) {
             screenScale = [1.5, 1.5, 1.5];
-            screenPosition = [0, -1.5, 0];
+            screenPosition = [0, -1.5, 2];
         } else {
             screenScale = [3, 3, 3];
-            screenPosition = [0, -4, -4];
+            screenPosition = [-2, -2, 1];
         }
 
         return [screenScale, screenPosition];
@@ -102,11 +103,11 @@ const Home = () => {
         let screenScale, screenPosition;
 
         if (window.innerWidth < 768) {
-            screenScale = [0.9, 0.9, 0.9];
-            screenPosition = [0, -6.5, -43.4];
+            screenScale = [6, 6, 6];
+            screenPosition = [0, 0, -5];
         } else {
-            screenScale = [1, 1, 1];
-            screenPosition = [0, -6.5, -43.4];
+            screenScale = [8.5, 8.5, 8.5];
+            screenPosition = [0, 0, -8];
         }
 
         return [screenScale, screenPosition];
@@ -130,9 +131,8 @@ const Home = () => {
             )}
 
             <Canvas
-                className={`w-full h-screen bg-transparent ${
-                    isRotating ? "cursor-grabbing" : "cursor-grab"
-                }`}
+                className={`w-full h-screen bg-transparent ${isRotating ? "cursor-grabbing" : "cursor-grab"
+                    }`}
                 camera={{ near: 0.1, far: 1000 }}
             >
                 <Suspense fallback={<Loader />}>
