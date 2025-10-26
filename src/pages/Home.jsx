@@ -1,20 +1,34 @@
 ﻿import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 
-import sakura from "../assets/sakura.mp3";
+import sakuraPart0 from "../assets/sakura-part0.mp3";
+import sakuraPart1 from "../assets/sakura-part1.mp3";
+import sakuraPart2 from "../assets/sakura-part2.mp3";
+import sakuraPart3 from "../assets/sakura-part3.mp3";
+import sakuraPart4 from "../assets/sakura-part4.mp3";
 import { HomeInfo, Loader } from "../components";
 import { soundoff, soundon } from "../assets/icons";
 import { Bird, Island, Plane, Sky } from "../models";
 
 const Home = () => {
-    const audioRef = useRef(new Audio(sakura));
-    audioRef.current.volume = 0.4;
-    audioRef.current.loop = true;
+    const audioTracks = useRef([
+        new Audio(sakuraPart0),
+        new Audio(sakuraPart1),
+        new Audio(sakuraPart2),
+        new Audio(sakuraPart3),
+        new Audio(sakuraPart4),
+    ]);
+
+    // Set volume for all tracks
+    audioTracks.current.forEach(audio => {
+        audio.volume = 0.4;
+    });
 
     const [currentStage, setCurrentStage] = useState(1);
     const [isRotating, setIsRotating] = useState(false);
     const [isPlayingMusic, setIsPlayingMusic] = useState(false);
     const [showHints, setShowHints] = useState(false);
+    const [currentTrack, setCurrentTrack] = useState(0);
 
     useEffect(() => {
         // Check if user has seen the hints before
@@ -35,15 +49,39 @@ const Home = () => {
         localStorage.setItem('hasSeenHints', 'true');
     };
 
+    // Reset track to beginning when music is turned off
     useEffect(() => {
-        if (isPlayingMusic) {
-            audioRef.current.play();
+        if (!isPlayingMusic) {
+            setCurrentTrack(0);
+            audioTracks.current.forEach(audio => {
+                audio.currentTime = 0;
+            });
         }
-
-        return () => {
-            audioRef.current.pause();
-        };
     }, [isPlayingMusic]);
+
+    // Handle audio playback with chunked tracks
+    useEffect(() => {
+        const currentAudio = audioTracks.current[currentTrack];
+
+        if (isPlayingMusic) {
+            currentAudio.play();
+
+            // When current track ends, move to next track
+            const handleTrackEnd = () => {
+                setCurrentTrack((prev) => (prev + 1) % audioTracks.current.length); // Loop back to start
+            };
+
+            currentAudio.addEventListener('ended', handleTrackEnd);
+
+            return () => {
+                currentAudio.removeEventListener('ended', handleTrackEnd);
+                currentAudio.pause();
+            };
+        } else {
+            // Pause all tracks when music is stopped
+            audioTracks.current.forEach(audio => audio.pause());
+        }
+    }, [isPlayingMusic, currentTrack]);
 
     const adjustBiplaneForScreenSize = () => {
         let screenScale, screenPosition;
