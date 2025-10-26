@@ -14,6 +14,26 @@ const Home = () => {
     const [currentStage, setCurrentStage] = useState(1);
     const [isRotating, setIsRotating] = useState(false);
     const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+    const [showHints, setShowHints] = useState(false);
+
+    useEffect(() => {
+        // Check if user has seen the hints before
+        const hasSeenHints = localStorage.getItem('hasSeenHints');
+        if (!hasSeenHints) {
+            setShowHints(true);
+            // Auto-hide hints after 8 seconds
+            const timer = setTimeout(() => {
+                setShowHints(false);
+                localStorage.setItem('hasSeenHints', 'true');
+            }, 8000);
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
+    const dismissHints = () => {
+        setShowHints(false);
+        localStorage.setItem('hasSeenHints', 'true');
+    };
 
     useEffect(() => {
         if (isPlayingMusic) {
@@ -63,6 +83,14 @@ const Home = () => {
                 {currentStage && <HomeInfo currentStage={currentStage} />}
             </div>
 
+            {/* Hint tooltips for first-time visitors */}
+            {showHints && (
+                <>
+                    {/* Click/drag hint - ripple circle in the center */}
+                    <div className='click-hint-circle z-20 pointer-events-none'></div>
+                </>
+            )}
+
             <Canvas
                 className={`w-full h-screen bg-transparent ${
                     isRotating ? "cursor-grabbing" : "cursor-grab"
@@ -105,12 +133,17 @@ const Home = () => {
             </Canvas>
 
             <div className='absolute bottom-2 left-2'>
-                <img
-                    src={!isPlayingMusic ? soundoff : soundon}
-                    alt='jukebox'
-                    onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-                    className='w-10 h-10 cursor-pointer object-contain'
-                />
+                <div className='relative'>
+                    {showHints && (
+                        <div className='music-hint-circle'></div>
+                    )}
+                    <img
+                        src={!isPlayingMusic ? soundoff : soundon}
+                        alt='jukebox'
+                        onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+                        className='w-10 h-10 cursor-pointer object-contain relative z-10'
+                    />
+                </div>
             </div>
         </section>
     );

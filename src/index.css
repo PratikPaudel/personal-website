@@ -202,3 +202,118 @@ body:has(.card[data-color="green"]:hover) {
         margin-right: -16% !important;
     }
 }
+
+/* Click hint ripple animation */
+.click-hint-circle {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: dragHint 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Music hint circle animation - same style as drag hint */
+.music-hint-circle {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: rgba(59, 130, 246, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: musicHintDelay 3s linear forwards;
+}
+
+@keyframes musicHintDelay {
+    0%, 99% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.music-hint-circle:before,
+.music-hint-circle:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    border-radius: 50%;
+}
+
+.music-hint-circle:before {
+    animation: ripple 3s linear infinite 3s;
+}
+
+.music-hint-circle:after {
+    animation: ripple 3s linear infinite 4.5s;
+}
+
+.click-hint-circle:before,
+.click-hint-circle:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+.click-hint-circle:before {
+    animation: ripple 3s linear infinite;
+}
+
+.click-hint-circle:after {
+    animation: ripple 3s linear 1.5s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes dragHint {
+    0%, 35% {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    45% {
+        left: 45%;
+        transform: translate(-50%, -50%);
+    }
+    50%, 85% {
+        left: 45%;
+        transform: translate(-50%, -50%);
+    }
+    95% {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
