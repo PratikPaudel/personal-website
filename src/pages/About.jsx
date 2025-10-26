@@ -1,4 +1,5 @@
-﻿import {
+﻿import { useState, useEffect } from "react";
+import {
     VerticalTimeline,
     VerticalTimelineElement,
 } from "react-vertical-timeline-component";
@@ -9,6 +10,25 @@ import { experiences, skills } from "../constants";
 import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
+    const [showBackToTop, setShowBackToTop] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show button when user scrolls down 300px
+            setShowBackToTop(window.scrollY > 300);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
     return (
         <section className='max-container'>
             <h1 className='head-text'>
@@ -127,6 +147,30 @@ const About = () => {
             <hr className='border-slate-200' />
 
             <CTA />
+
+            {/* Back to Top Button */}
+            {showBackToTop && (
+                <button
+                    onClick={scrollToTop}
+                    className='fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50'
+                    aria-label='Back to top'
+                >
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                    >
+                        <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M5 10l7-7m0 0l7 7m-7-7v18'
+                        />
+                    </svg>
+                </button>
+            )}
         </section>
     );
 };

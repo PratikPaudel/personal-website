@@ -16,6 +16,9 @@ import { useFrame, useThree } from "@react-three/fiber";
 
 import islandScene from "../assets/3d/island.glb";
 
+// Preload the model for better performance
+useGLTF.preload(islandScene);
+
 export function Island({
                            isRotating,
                            setIsRotating,
