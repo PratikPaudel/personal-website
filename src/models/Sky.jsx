@@ -30,7 +30,6 @@ export function Sky({ isRotating, isDarkMode }) {
                     });
                 }
             });
-            console.log('Cloned and stored materials for', originalMaterials.current.size, 'meshes');
         }
     }, []);
 

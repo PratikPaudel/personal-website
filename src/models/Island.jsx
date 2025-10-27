@@ -14,7 +14,7 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
-import islandScene from "../assets/3d/temple.glb";
+import islandScene from "../assets/3d/temple.compressed.glb";
 
 // Preload the model for better performance
 useGLTF.preload(islandScene);
