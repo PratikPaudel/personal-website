@@ -8,8 +8,9 @@ import birdScene from "../assets/3d/bird.glb";
 useGLTF.preload(birdScene);
 
 // 3D Model from: https://sketchfab.com/3d-models/phoenix-bird-844ba0cf144a413ea92c779f18912042
-export function Bird() {
+export function Bird({ isDarkMode }) {
     const birdRef = useRef();
+    const originalColors = useRef(new Map());
 
     // Load the 3D model and animations from the provided GLTF file
     const { scene, animations } = useGLTF(birdScene);
@@ -22,6 +23,40 @@ export function Bird() {
     useEffect(() => {
         actions["Take 001"].play();
     }, []);
+
+    // Store original colors on first render
+    useEffect(() => {
+        if (birdRef.current && originalColors.current.size === 0) {
+            birdRef.current.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    originalColors.current.set(child.uuid, child.material.color.clone());
+                }
+            });
+        }
+    }, []);
+
+    // Update bird materials based on theme
+    useEffect(() => {
+        if (birdRef.current) {
+            birdRef.current.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    const original = originalColors.current.get(child.uuid);
+                    if (original) {
+                        if (isDarkMode) {
+                            // Darken the bird in dark mode
+                            const darkColor = original.clone();
+                            darkColor.multiplyScalar(0.6);
+                            child.material.color.copy(darkColor);
+                        } else {
+                            // Restore original color in light mode
+                            child.material.color.copy(original);
+                        }
+                        child.material.needsUpdate = true;
+                    }
+                }
+            });
+        }
+    }, [isDarkMode]);
 
     useFrame(({ clock, camera }) => {
         // Update the Y position to simulate bird-like motion using a sine wave

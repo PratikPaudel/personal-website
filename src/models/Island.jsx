@@ -215,25 +215,6 @@ export function Island({
         }
     });
 
-    // Update temple materials for dark mode glow
-    useEffect(() => {
-        if (islandRef.current) {
-            islandRef.current.traverse((child) => {
-                if (child.isMesh && child.material) {
-                    if (isDarkMode) {
-                        // Add warm lantern glow in dark mode
-                        child.material.emissive = child.material.emissive || child.material.color.clone();
-                        child.material.emissive.setHex(0xff9944);
-                        child.material.emissiveIntensity = 0.4;
-                    } else {
-                        // Reset to daylight mode
-                        child.material.emissive?.setHex(0x000000);
-                        child.material.emissiveIntensity = 0;
-                    }
-                }
-            });
-        }
-    }, [isDarkMode]);
 
     return (
         <a.group ref={islandRef} {...props} dispose={null}>

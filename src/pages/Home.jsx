@@ -29,7 +29,15 @@ const Home = () => {
     const [isPlayingMusic, setIsPlayingMusic] = useState(false);
     const [showHints, setShowHints] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const saved = localStorage.getItem('isDarkMode');
+        return saved === 'true';
+    });
+
+    useEffect(() => {
+        // Save dark mode preference
+        localStorage.setItem('isDarkMode', isDarkMode);
+    }, [isDarkMode]);
 
     useEffect(() => {
         // Check if user has seen the hints before
@@ -159,36 +167,27 @@ const Home = () => {
                         </>
                     )}
 
-                    {/* Dark Mode - Mystical moonlit night with cool blue tones */}
+                    {/* Dark Mode - Same lighting as light mode to keep temple unchanged */}
                     {isDarkMode && (
                         <>
-                            {/* Main moonlight from above */}
-                            <directionalLight position={[100, 150, -200]} intensity={1.2} color="#c9d5f0" castShadow />
-                            {/* Ambient night glow */}
-                            <ambientLight intensity={0.2} color="#1a1a3e" />
-                            {/* Rim lighting for edges */}
-                            <pointLight position={[-50, 30, 50]} intensity={0.8} color="#4a5f9d" />
-                            <pointLight position={[50, 30, 50]} intensity={0.8} color="#4a5f9d" />
-                            {/* Mystical glow around temple */}
-                            <pointLight position={[0, 5, 0]} intensity={2} color="#6a7fc1" distance={30} />
-                            {/* Moonlight spotlight */}
+                            <directionalLight position={[1, 1, 1]} intensity={2} />
+                            <ambientLight intensity={0.5} />
+                            <pointLight position={[10, 5, 10]} intensity={2} />
                             <spotLight
-                                position={[100, 150, -200]}
-                                angle={0.3}
+                                position={[0, 50, 10]}
+                                angle={0.15}
                                 penumbra={1}
-                                intensity={1.8}
-                                color="#d0dff5"
-                                castShadow
+                                intensity={2}
                             />
                             <hemisphereLight
-                                skyColor='#1a1a3e'
-                                groundColor='#0a0a1a'
-                                intensity={0.4}
+                                skyColor='#b1e1ff'
+                                groundColor='#000000'
+                                intensity={1}
                             />
                         </>
                     )}
 
-                    <Bird />
+                    <Bird isDarkMode={isDarkMode} />
                     <Sky isRotating={isRotating} isDarkMode={isDarkMode} />
                     <Island
                         isRotating={isRotating}
@@ -201,6 +200,7 @@ const Home = () => {
                     />
                     <Plane
                         isRotating={isRotating}
+                        isDarkMode={isDarkMode}
                         position={biplanePosition}
                         rotation={[0, 20.1, 0]}
                         scale={biplaneScale}

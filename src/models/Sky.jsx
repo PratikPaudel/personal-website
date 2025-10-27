@@ -10,16 +10,19 @@ useGLTF.preload(skyScene);
 
 // 3D Model from: https://sketchfab.com/3d-models/phoenix-bird-844ba0cf144a413ea92c779f18912042
 export function Sky({ isRotating, isDarkMode }) {
-    const sky = useGLTF(skyScene);
+    const { scene } = useGLTF(skyScene);
     const skyRef = useRef();
     const originalMaterials = useRef(new Map());
+    const clonedScene = useMemo(() => scene.clone(true), [scene]);
 
-    // Store original material colors on first render
+    // Store original material colors and clone materials to avoid shared state
     useEffect(() => {
         if (skyRef.current && originalMaterials.current.size === 0) {
             skyRef.current.traverse((child) => {
                 if (child.isMesh && child.material) {
-                    console.log('Sky mesh found:', child.name, 'Color:', child.material.color);
+                    // Clone the material to avoid shared state issues
+                    child.material = child.material.clone();
+                    // Store the original colors
                     originalMaterials.current.set(child.uuid, {
                         color: child.material.color.clone(),
                         emissive: child.material.emissive?.clone(),
@@ -27,7 +30,7 @@ export function Sky({ isRotating, isDarkMode }) {
                     });
                 }
             });
-            console.log('Stored original materials for', originalMaterials.current.size, 'meshes');
+            console.log('Cloned and stored materials for', originalMaterials.current.size, 'meshes');
         }
     }, []);
 
@@ -59,26 +62,32 @@ export function Sky({ isRotating, isDarkMode }) {
 
     // Update sky materials based on theme
     useEffect(() => {
-        if (skyRef.current) {
+        if (skyRef.current && originalMaterials.current.size > 0) {
             skyRef.current.traverse((child) => {
                 if (child.isMesh && child.material) {
-                    if (isDarkMode) {
-                        // Dark mode - deep twilight blues and purples
-                        child.material.color.setHex(0x1a1a3e);
-                        child.material.emissive?.setHex(0x0f0f2e);
-                        child.material.emissiveIntensity = 0.3;
-                    } else {
-                        // Light mode - restore original white
-                        const original = originalMaterials.current.get(child.uuid);
-                        if (original) {
+                    const original = originalMaterials.current.get(child.uuid);
+                    if (original) {
+                        if (isDarkMode) {
+                            // Dark mode - subtle dark with soft bluish tones
+                            child.material.color.setHex(0x3a4a6a); // Soft dark blue-grey
+                            if (child.material.emissive) {
+                                child.material.emissive.setHex(0x1a2a3a); // Subtle blue glow
+                                child.material.emissiveIntensity = 0.2;
+                            }
+                        } else {
+                            // Light mode - restore original white
                             child.material.color.copy(original.color);
-                            if (child.material.emissive && original.emissive) {
-                                child.material.emissive.copy(original.emissive);
+                            if (child.material.emissive) {
+                                if (original.emissive) {
+                                    child.material.emissive.copy(original.emissive);
+                                } else {
+                                    child.material.emissive.setHex(0x000000);
+                                }
                             }
                             child.material.emissiveIntensity = original.emissiveIntensity;
                         }
+                        child.material.needsUpdate = true;
                     }
-                    child.material.needsUpdate = true;
                 }
             });
         }
@@ -95,7 +104,7 @@ export function Sky({ isRotating, isDarkMode }) {
 
     return (
         <group ref={skyRef}>
-            <primitive object={sky.scene} />
+            <primitive object={clonedScene} />
 
             {/* Stars visible only in dark mode */}
             {isDarkMode && <primitive object={stars} />}
