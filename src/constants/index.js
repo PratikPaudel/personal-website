@@ -140,17 +140,16 @@ export const skills = [
 export const experiences = [
     {
         title: "AI Engineer",
-        company_name: "StackAI",
+        company_name: "StackAI (San Francisco, CA, USA)",
         icon: stackai,
         iconBg: "#FFFFFF",
         date: "Oct 2024 - Present",
         points: [
-            "San Francisco, CA",
         ],
     },
     {
         title: "Full Stack Developer",
-        company_name: "Boxsy Inc.",
+        company_name: "Boxsy Inc (Austin, TX, USA)",
         icon: boxsy,
         iconBg: "#6366F1",
         date: "Jul 2024 - Oct 2024",
@@ -162,7 +161,7 @@ export const experiences = [
     },
     {
         title: "IT - Software Engineering Intern",
-        company_name: "Vermeer Corporation",
+        company_name: "Vermeer Corporation (Pella, IA, USA)",
         icon: vermeer,
         iconBg: "#accbe1",
         date: "May 2024 - Dec 2024",
@@ -174,7 +173,7 @@ export const experiences = [
     },
     {
         title: "Full Stack Web Developer",
-        company_name: "Northwestern College",
+        company_name: "Northwestern College (Orange City, IA, USA)",
         icon: nwc,
         iconBg: "#fbc3bc",
         date: "Aug 2022 - May 2024",
@@ -186,7 +185,7 @@ export const experiences = [
     },
     {
         title: "Web Developer",
-        company_name: "Scholarship Auditions",
+        company_name: "Scholarship Auditions (Nashville, TN, USA)",
         icon: scholarshipauditions,
         iconBg: "#ff6950",
         date: "Jan 2022 - Jan 2023",
@@ -198,7 +197,7 @@ export const experiences = [
     },
     {
         title: "Student Media Manager - Esports",
-        company_name: "Northwestern",
+        company_name: "Northwestern (Orange City, IA, USA)",
         icon: esports,
         iconBg: "#A80000",
         date: "Aug 2021 - Aug 2024",

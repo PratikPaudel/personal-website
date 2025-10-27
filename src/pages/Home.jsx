@@ -1,7 +1,6 @@
 ﻿import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 
-import { useTheme } from "../context/ThemeContext";
 import { soundoff, soundon } from "../assets/icons";
 import sakuraPart0 from "../assets/sakura-part0.mp3";
 import sakuraPart1 from "../assets/sakura-part1.mp3";
@@ -9,7 +8,71 @@ import sakuraPart2 from "../assets/sakura-part2.mp3";
 import sakuraPart3 from "../assets/sakura-part3.mp3";
 import sakuraPart4 from "../assets/sakura-part4.mp3";
 import { HomeInfo, Loader } from "../components";
+import { useTheme } from "../context/ThemeContext";
 import { Bird, Island, Plane, Sky } from "../models";
+
+// Stars component for animated background
+const AnimatedStars = () => {
+    const [stars, setStars] = useState([]);
+    const colors = ['#f5d76e', '#f7ca18', '#f4d03f', '#ececec', '#ecf0f1', '#a2ded0'];
+
+    useEffect(() => {
+        // Generate initial stars
+        const newStars = [];
+        for (let i = 0; i < 150; i++) {
+            newStars.push({
+                id: i,
+                size: Math.random() * 3,
+                top: Math.random() * 100,
+                left: Math.random() * 100,
+                color: colors[Math.floor(Math.random() * colors.length)],
+            });
+        }
+        setStars(newStars);
+
+        // Animate stars position
+        const animateStars = () => {
+            setStars(prevStars =>
+                prevStars.map(star => ({
+                    ...star,
+                    top: Math.random() * 100,
+                    left: Math.random() * 100,
+                }))
+            );
+        };
+
+        // Initial animation after 10ms
+        const initialTimeout = setTimeout(animateStars, 10);
+
+        // Repeat animation every 100 seconds
+        const interval = setInterval(animateStars, 100000);
+
+        return () => {
+            clearTimeout(initialTimeout);
+            clearInterval(interval);
+        };
+    }, []);
+
+    return (
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30" style={{ zIndex: 1 }}>
+            {stars.map(star => (
+                <span
+                    key={star.id}
+                    className="absolute rounded-full"
+                    style={{
+                        width: `${star.size}px`,
+                        height: `${star.size}px`,
+                        top: `${star.top}%`,
+                        left: `${star.left}%`,
+                        background: star.color,
+                        boxShadow: `0 0 ${Math.random() * 10}px ${star.color}`,
+                        transition: 'all 100s linear',
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
 
 const Home = () => {
     const audioTracks = useRef([
@@ -119,6 +182,16 @@ const Home = () => {
 
     return (
         <section className='w-full h-screen relative'>
+            {/* Animated stars background for dark mode */}
+            {isDarkMode && <AnimatedStars />}
+
+            {/* Nepal Flag on top of temple */}
+            <div className='absolute top-[28%] left-[calc(50%+4px)] transform -translate-x-1/2 -translate-y-1/2 z-[5] pointer-events-none'>
+                <span className='text-7xl' style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}>
+                    🇳🇵
+                </span>
+            </div>
+
             <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
                 {currentStage && <HomeInfo currentStage={currentStage} />}
             </div>
@@ -138,7 +211,7 @@ const Home = () => {
             >
                 <Suspense fallback={<Loader />}>
                     {/* Fog for atmospheric depth - only in dark mode */}
-                    {isDarkMode && <fog attach="fog" args={['#0a0a1a', 50, 300]} />}
+                    {isDarkMode && <fog attach="fog" args={['#1e293b', 50, 300]} />}
                     {/* Light Mode - Bright daytime with warm golden sunlight */}
                     {!isDarkMode && (
                         <>

@@ -203,6 +203,11 @@ body:has(.card[data-color="green"]:hover) {
     }
 }
 
+/* Dark mode timeline date colors */
+.dark .vertical-timeline-element-date {
+    color: #cbd5e1 !important;
+}
+
 /* Click hint ripple animation */
 .click-hint-circle {
     height: 60px;
@@ -316,4 +321,79 @@ body:has(.card[data-color="green"]:hover) {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+/* Stars background for dark mode */
+.stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.stars-container::before,
+.stars-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 60px 70px, white, transparent),
+        radial-gradient(1px 1px at 50px 50px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, white, transparent),
+        radial-gradient(2px 2px at 90px 10px, white, transparent),
+        radial-gradient(1px 1px at 120px 60px, white, transparent),
+        radial-gradient(1px 1px at 170px 120px, white, transparent),
+        radial-gradient(2px 2px at 25px 140px, white, transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.4;
+}
+
+.stars-container::after {
+    animation: twinkle 4s ease-in-out infinite;
+    background-image:
+        radial-gradient(1px 1px at 40px 20px, white, transparent),
+        radial-gradient(1px 1px at 80px 90px, white, transparent),
+        radial-gradient(2px 2px at 150px 40px, white, transparent),
+        radial-gradient(1px 1px at 30px 100px, white, transparent),
+        radial-gradient(1px 1px at 110px 30px, white, transparent),
+        radial-gradient(1px 1px at 180px 150px, white, transparent);
+    background-size: 200px 200px;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Logo wave animation - horizontal wave like a flag */
+@keyframes wave {
+    0%, 100% {
+        transform: skewX(0deg);
+    }
+    25% {
+        transform: skewX(5deg);
+    }
+    50% {
+        transform: skewX(0deg);
+    }
+    75% {
+        transform: skewX(-5deg);
+    }
+}
+
+.animate-wave {
+    animation: wave 2.5s ease-in-out infinite;
+    transform-origin: left center;
 }

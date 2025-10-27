@@ -18,7 +18,7 @@ const Footer = () => {
                             <img
                                 src={link.iconUrl}
                                 alt={link.name}
-                                className='w-6 h-6 object-contain'
+                                className={`w-6 h-6 object-contain ${link.name === 'GitHub' ? 'dark:brightness-200 dark:invert' : ''}`}
                             />
                         </Link>
                     ))}

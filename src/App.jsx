@@ -21,7 +21,7 @@ const RouteLoader = () => (
 const App = () => {
     return (
         <ThemeProvider>
-            <main className='bg-slate-300/20 dark:bg-slate-900 transition-colors duration-300'>
+            <main className='bg-slate-300/20 dark:bg-slate-800 transition-colors duration-300'>
                 <Router>
                     <Navbar />
                     <Suspense fallback={<RouteLoader />}>

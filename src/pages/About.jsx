@@ -104,6 +104,7 @@ const About = () => {
                                     boxShadow: "none",
                                     maxWidth: "600px",
                                     background: isDarkMode ? "#1e293b" : "#ffffff",
+                                    border: isDarkMode ? "2px solid rgba(255, 255, 255, 0.2)" : "none",
                                 }}
                             >
                                 <div>
@@ -139,7 +140,7 @@ const About = () => {
                 <div className='mt-5 flex flex-col gap-3 text-slate-500 dark:text-slate-400'>
                     <ul className='list-disc ml-5 space-y-2'>
                         <li>5x Hackathon Winner (HackHarvard, Y Combinator, and more)</li>
-                        <li>YouTube Content Creator (100K+ views, 660+ subscribers)</li>
+                        <li>YouTube Content Creator (100K+ views, 660+ subscribers) - <a href="https://www.youtube.com/@PratikkkPaudel" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">@PratikkkPaudel</a></li>
                         <li>Research Assistant - H-alpha Spectral Imaging of z&gt;5 Quasars (Jan 2024 - May 2024)</li>
                         <li>NEXT Program Mentor (2022-2023)</li>
                         <li>Intercultural Development Club Leader (2021-2024)</li>
