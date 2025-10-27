@@ -168,7 +168,7 @@ export function Island({
 
             // Stop rotation when speed is very small, then apply auto-rotation
             if (Math.abs(rotationSpeed.current) < 0.001) {
-                rotationSpeed.current = 0.001; // Slow auto-rotation speed
+                rotationSpeed.current = -0.001; // Slow auto-rotation speed (reversed direction)
             }
 
             islandRef.current.rotation.y += rotationSpeed.current;

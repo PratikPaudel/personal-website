@@ -18,7 +18,7 @@ const HomeInfo = ({ currentStage }) => {
         return (
             <div className='info-box'>
                 <p className='font-medium sm:text-xl text-center'>
-                    Worked with many companies <br /> and picked up many skills along the way
+                    Full-stack developer and AI engineer <br /> passionate about building impactful solutions
                 </p>
 
                 <Link to='/about' className='neo-brutalism-white neo-btn'>
@@ -33,11 +33,13 @@ const HomeInfo = ({ currentStage }) => {
         return (
             <div className='info-box'>
                 <p className='font-medium text-center sm:text-xl'>
-                    Led multiple projects to success over the years. <br /> Curious about the impact?
+                    Led multiple projects to success
+                    <br />
+                    Check out the impact
                 </p>
 
                 <Link to='/projects' className='neo-brutalism-white neo-btn'>
-                    Visit my portfolio
+                    Portfolio
                     <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
                 </Link>
             </div>
@@ -48,7 +50,7 @@ const HomeInfo = ({ currentStage }) => {
         return (
              <div className='info-box'>
                 <p className='font-medium sm:text-xl text-center'>
-                    Full Stack Software Engineer seeking new opportunities in the US <br/> Available for immediate hire
+                    Have a project in mind? <br/> Let's build something together
                 </p>
                 <Link to='/contact' className='neo-brutalism-white neo-btn'>
                     Let's connect
