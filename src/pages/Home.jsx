@@ -136,27 +136,65 @@ const Home = () => {
                 camera={{ near: 0.1, far: 1000 }}
             >
                 <Suspense fallback={<Loader />}>
-                    <directionalLight position={[1, 1, 1]} intensity={2} />
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[10, 5, 10]} intensity={2} />
-                    <spotLight
-                        position={[0, 50, 10]}
-                        angle={0.15}
-                        penumbra={1}
-                        intensity={2}
-                    />
-                    <hemisphereLight
-                        skyColor='#b1e1ff'
-                        groundColor='#000000'
-                        intensity={1}
-                    />
+                    {/* Fog for atmospheric depth - only in dark mode */}
+                    {isDarkMode && <fog attach="fog" args={['#0a0a1a', 50, 300]} />}
+                    {/* Light Mode - Bright daytime with warm golden sunlight */}
+                    {!isDarkMode && (
+                        <>
+                            <directionalLight position={[5, 5, 5]} intensity={2.5} color="#FFF4E6" />
+                            <ambientLight intensity={0.8} color="#FFFAF0" />
+                            <pointLight position={[10, 8, 10]} intensity={1.5} color="#FFE4B5" />
+                            <spotLight
+                                position={[0, 50, 10]}
+                                angle={0.2}
+                                penumbra={1}
+                                intensity={2}
+                                color="#FAFAD2"
+                            />
+                            <hemisphereLight
+                                skyColor='#ffffff'
+                                groundColor='#F5DEB3'
+                                intensity={0.6}
+                            />
+                        </>
+                    )}
+
+                    {/* Dark Mode - Mystical moonlit night with cool blue tones */}
+                    {isDarkMode && (
+                        <>
+                            {/* Main moonlight from above */}
+                            <directionalLight position={[100, 150, -200]} intensity={1.2} color="#c9d5f0" castShadow />
+                            {/* Ambient night glow */}
+                            <ambientLight intensity={0.2} color="#1a1a3e" />
+                            {/* Rim lighting for edges */}
+                            <pointLight position={[-50, 30, 50]} intensity={0.8} color="#4a5f9d" />
+                            <pointLight position={[50, 30, 50]} intensity={0.8} color="#4a5f9d" />
+                            {/* Mystical glow around temple */}
+                            <pointLight position={[0, 5, 0]} intensity={2} color="#6a7fc1" distance={30} />
+                            {/* Moonlight spotlight */}
+                            <spotLight
+                                position={[100, 150, -200]}
+                                angle={0.3}
+                                penumbra={1}
+                                intensity={1.8}
+                                color="#d0dff5"
+                                castShadow
+                            />
+                            <hemisphereLight
+                                skyColor='#1a1a3e'
+                                groundColor='#0a0a1a'
+                                intensity={0.4}
+                            />
+                        </>
+                    )}
 
                     <Bird />
-                    <Sky isRotating={isRotating} />
+                    <Sky isRotating={isRotating} isDarkMode={isDarkMode} />
                     <Island
                         isRotating={isRotating}
                         setIsRotating={setIsRotating}
                         setCurrentStage={setCurrentStage}
+                        isDarkMode={isDarkMode}
                         position={islandPosition}
                         rotation={[0.1, 4.7077, 0]}
                         scale={islandScale}
@@ -170,7 +208,7 @@ const Home = () => {
                 </Suspense>
             </Canvas>
 
-            <div className='absolute bottom-2 left-2'>
+            <div className='absolute bottom-2 left-2 flex gap-3'>
                 <div className='relative'>
                     {showHints && (
                         <div className='music-hint-circle'></div>
@@ -181,6 +219,18 @@ const Home = () => {
                         onClick={() => setIsPlayingMusic(!isPlayingMusic)}
                         className='w-10 h-10 cursor-pointer object-contain relative z-10'
                     />
+                </div>
+
+                <div className='relative'>
+                    <button
+                        onClick={() => setIsDarkMode(!isDarkMode)}
+                        className='w-10 h-10 cursor-pointer bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-all'
+                        aria-label='Toggle theme'
+                    >
+                        <span className='text-2xl'>
+                            {isDarkMode ? '☀️' : '🌙'}
+                        </span>
+                    </button>
                 </div>
             </div>
         </section>

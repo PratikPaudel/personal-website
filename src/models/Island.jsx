@@ -24,6 +24,7 @@ export function Island({
                            setIsRotating,
                            setCurrentStage,
                            currentFocusPoint,
+                           isDarkMode,
                            ...props
                        }) {
     const islandRef = useRef();
@@ -214,12 +215,25 @@ export function Island({
         }
     });
 
-    // Debug logging
+    // Update temple materials for dark mode glow
     useEffect(() => {
-        console.log('Nodes:', nodes);
-        console.log('Materials:', materials);
-        console.log('Has mesh_0:', nodes.mesh_0);
-    }, [nodes, materials]);
+        if (islandRef.current) {
+            islandRef.current.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    if (isDarkMode) {
+                        // Add warm lantern glow in dark mode
+                        child.material.emissive = child.material.emissive || child.material.color.clone();
+                        child.material.emissive.setHex(0xff9944);
+                        child.material.emissiveIntensity = 0.4;
+                    } else {
+                        // Reset to daylight mode
+                        child.material.emissive?.setHex(0x000000);
+                        child.material.emissiveIntensity = 0;
+                    }
+                }
+            });
+        }
+    }, [isDarkMode]);
 
     return (
         <a.group ref={islandRef} {...props} dispose={null}>
