@@ -2,6 +2,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import { Footer, Navbar } from "./components";
+import { ThemeProvider } from "./context/ThemeContext";
 import posthog from 'posthog-js';
 
 // Lazy load route components for code splitting
@@ -19,29 +20,31 @@ const RouteLoader = () => (
 
 const App = () => {
     return (
-        <main className='bg-slate-300/20'>
-            <Router>
-                <Navbar />
-                <Suspense fallback={<RouteLoader />}>
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route
-                            path='/*'
-                            element={
-                                <>
-                                    <Routes>
-                                        <Route path='/about' element={<About />} />
-                                        <Route path='/projects' element={<Projects />} />
-                                        <Route path='/contact' element={<Contact />} />
-                                    </Routes>
-                                    <Footer />
-                                </>
-                            }
-                        />
-                    </Routes>
-                </Suspense>
-            </Router>
-        </main>
+        <ThemeProvider>
+            <main className='bg-slate-300/20 dark:bg-slate-900 transition-colors duration-300'>
+                <Router>
+                    <Navbar />
+                    <Suspense fallback={<RouteLoader />}>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route
+                                path='/*'
+                                element={
+                                    <>
+                                        <Routes>
+                                            <Route path='/about' element={<About />} />
+                                            <Route path='/projects' element={<Projects />} />
+                                            <Route path='/contact' element={<Contact />} />
+                                        </Routes>
+                                        <Footer />
+                                    </>
+                                }
+                            />
+                        </Routes>
+                    </Suspense>
+                </Router>
+            </main>
+        </ThemeProvider>
     );
 };
 

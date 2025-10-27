@@ -5,8 +5,10 @@ import { Suspense, useRef, useState } from "react";
 import { Fox } from "../models";
 import useAlert from "../hooks/useAlert";
 import { Alert, Loader } from "../components";
+import { useTheme } from "../context/ThemeContext";
 
 const Contact = () => {
+    const { isDarkMode, toggleTheme } = useTheme();
     const formRef = useRef();
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const { alert, showAlert, hideAlert } = useAlert();
@@ -76,14 +78,14 @@ const Contact = () => {
             {alert.show && <Alert {...alert} />}
 
             <div className='flex-1 min-w-[50%] flex flex-col'>
-                <h1 className='head-text'>Get in Touch</h1>
+                <h1 className='head-text dark:text-white'>Get in Touch</h1>
 
                 <form
                     ref={formRef}
                     onSubmit={handleSubmit}
                     className='w-full flex flex-col gap-7 mt-14'
                 >
-                    <label className='text-black-500 font-semibold'>
+                    <label className='text-black-500 dark:text-slate-200 font-semibold'>
                         Name
                         <input
                             type='text'
@@ -97,7 +99,7 @@ const Contact = () => {
                             onBlur={handleBlur}
                         />
                     </label>
-                    <label className='text-black-500 font-semibold'>
+                    <label className='text-black-500 dark:text-slate-200 font-semibold'>
                         Email
                         <input
                             type='email'
@@ -111,7 +113,7 @@ const Contact = () => {
                             onBlur={handleBlur}
                         />
                     </label>
-                    <label className='text-black-500 font-semibold'>
+                    <label className='text-black-500 dark:text-slate-200 font-semibold'>
                         Your Message
                         <textarea
                             name='message'
@@ -165,6 +167,19 @@ const Contact = () => {
                         />
                     </Suspense>
                 </Canvas>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <div className='fixed bottom-8 left-8 z-50'>
+                <button
+                    onClick={toggleTheme}
+                    className='w-12 h-12 cursor-pointer bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-all shadow-lg'
+                    aria-label='Toggle theme'
+                >
+                    <span className='text-2xl'>
+                        {isDarkMode ? '☀️' : '🌙'}
+                    </span>
+                </button>
             </div>
         </section>
     );

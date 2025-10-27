@@ -39,11 +39,11 @@ body:has(.card[data-color="green"]:hover) {
     }
 
     .input {
-        @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card;
+        @apply bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card;
     }
 
     .textarea {
-        @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card;
+        @apply block p-2.5 w-full text-sm text-gray-900 dark:text-white bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card;
     }
 
     .btn {
@@ -75,7 +75,7 @@ body:has(.card[data-color="green"]:hover) {
     }
 
     .cta-text {
-        @apply text-black-500 font-extrabold flex-1 text-3xl max-md:text-center;
+        @apply text-black-500 dark:text-slate-200 font-extrabold flex-1 text-3xl max-md:text-center;
     }
 }
 

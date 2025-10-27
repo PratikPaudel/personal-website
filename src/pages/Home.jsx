@@ -1,6 +1,7 @@
 ﻿import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 
+import { useTheme } from "../context/ThemeContext";
 import { soundoff, soundon } from "../assets/icons";
 import sakuraPart0 from "../assets/sakura-part0.mp3";
 import sakuraPart1 from "../assets/sakura-part1.mp3";
@@ -24,20 +25,12 @@ const Home = () => {
         audio.volume = 0.4;
     });
 
+    const { isDarkMode, toggleTheme } = useTheme();
     const [currentStage, setCurrentStage] = useState(1);
     const [isRotating, setIsRotating] = useState(false);
     const [isPlayingMusic, setIsPlayingMusic] = useState(false);
     const [showHints, setShowHints] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const saved = localStorage.getItem('isDarkMode');
-        return saved === 'true';
-    });
-
-    useEffect(() => {
-        // Save dark mode preference
-        localStorage.setItem('isDarkMode', isDarkMode);
-    }, [isDarkMode]);
 
     useEffect(() => {
         // Check if user has seen the hints before
@@ -223,7 +216,7 @@ const Home = () => {
 
                 <div className='relative'>
                     <button
-                        onClick={() => setIsDarkMode(!isDarkMode)}
+                        onClick={toggleTheme}
                         className='w-10 h-10 cursor-pointer bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-all'
                         aria-label='Toggle theme'
                     >

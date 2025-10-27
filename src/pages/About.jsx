@@ -6,10 +6,12 @@ import {
 
 import { CTA } from "../components";
 import { experiences, skills } from "../constants";
+import { useTheme } from "../context/ThemeContext";
 
 import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
+    const { isDarkMode, toggleTheme } = useTheme();
     const [showBackToTop, setShowBackToTop] = useState(false);
 
     useEffect(() => {
@@ -31,7 +33,7 @@ const About = () => {
 
     return (
         <section className='max-container'>
-            <h1 className='head-text'>
+            <h1 className='head-text dark:text-white'>
                 Hello, I'm{" "}
                 <span className='blue-gradient_text font-semibold drop-shadow'>
                     {" "}
@@ -40,14 +42,14 @@ const About = () => {
                 👋
             </h1>
 
-            <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+            <div className='mt-5 flex flex-col gap-3 text-slate-500 dark:text-slate-400'>
                 <p>
                     A first-gen college graduate passionate about full-stack development and AI engineering. When I'm not coding, you'll find me working on video projects, reading, and traveling.
                 </p>
             </div>
 
             <div className='py-10 flex flex-col'>
-                <h3 className='subhead-text'>My Skills</h3>
+                <h3 className='subhead-text dark:text-white'>My Skills</h3>
 
                 <div className='mt-16 flex flex-wrap gap-12'>
                     {skills.map((skill) => (
@@ -71,8 +73,8 @@ const About = () => {
             </div>
 
             <div className='py-16'>
-                <h3 className='subhead-text'>Work Experience.</h3>
-                <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+                <h3 className='subhead-text dark:text-white'>Work Experience.</h3>
+                <div className='mt-5 flex flex-col gap-3 text-slate-500 dark:text-slate-400'>
                     <p>
                         I've worked with all sorts of companies, leveling up my skills and
                         teaming up with smart people. Here's the rundown:
@@ -101,14 +103,15 @@ const About = () => {
                                     borderBottomColor: experience.iconBg,
                                     boxShadow: "none",
                                     maxWidth: "600px",
+                                    background: isDarkMode ? "#1e293b" : "#ffffff",
                                 }}
                             >
                                 <div>
-                                    <h3 className='text-black text-xl font-poppins font-semibold'>
+                                    <h3 className='text-black dark:text-white text-xl font-poppins font-semibold'>
                                         {experience.title}
                                     </h3>
                                     <p
-                                        className='text-black-500 font-medium text-base'
+                                        className='text-black-500 dark:text-slate-400 font-medium text-base'
                                         style={{ margin: 0 }}
                                     >
                                         {experience.company_name}
@@ -119,7 +122,7 @@ const About = () => {
                                     {experience.points.map((point, index) => (
                                         <li
                                             key={`experience-point-${index}`}
-                                            className='text-black-500/50 font-normal pl-1 text-sm'
+                                            className='text-black-500/50 dark:text-slate-500 font-normal pl-1 text-sm'
                                         >
                                             {point}
                                         </li>
@@ -132,8 +135,8 @@ const About = () => {
             </div>
 
             <div className='py-16'>
-                <h3 className='subhead-text'>Leadership & Impact</h3>
-                <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+                <h3 className='subhead-text dark:text-white'>Leadership & Impact</h3>
+                <div className='mt-5 flex flex-col gap-3 text-slate-500 dark:text-slate-400'>
                     <ul className='list-disc ml-5 space-y-2'>
                         <li>5x Hackathon Winner (HackHarvard, Y Combinator, and more)</li>
                         <li>YouTube Content Creator (100K+ views, 660+ subscribers)</li>
@@ -144,7 +147,7 @@ const About = () => {
                 </div>
             </div>
 
-            <hr className='border-slate-200' />
+            <hr className='border-slate-200 dark:border-slate-700' />
 
             <CTA />
 
@@ -171,6 +174,19 @@ const About = () => {
                     </svg>
                 </button>
             )}
+
+            {/* Theme Toggle Button */}
+            <div className='fixed bottom-8 left-8 z-50'>
+                <button
+                    onClick={toggleTheme}
+                    className='w-12 h-12 cursor-pointer bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-all shadow-lg'
+                    aria-label='Toggle theme'
+                >
+                    <span className='text-2xl'>
+                        {isDarkMode ? '☀️' : '🌙'}
+                    </span>
+                </button>
+            </div>
         </section>
     );
 };
